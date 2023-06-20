@@ -1,9 +1,18 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+require('dotenv').config();
+
+const api = require('./backend/routes');
 
 const app = express();
 
+app.use(bodyParser.json());
 
-const PORT = 3080;
+console.log("Nome do banco de dados", process.env.MONGO_DB);
+console.log("Nome do usuario no banco de dados", process.env.MONGO_USER);
+
+
+
 
 app.get('/', (req, res) => {
     res.json({
@@ -11,17 +20,8 @@ app.get('/', (req, res) => {
     })
 });
 
-app.get('/portfolio', (req, res) => {
-    //acess db
-    const data = [{
-        id: 1,
-        name: "Douglas alves",
-        createdAt: "2023-06-20"
-    }];
-    res.json({
-        sucess: true,
-        data: data
-    });
-})
+app.use('/api', api);
+
+const PORT = process.env.PORT;
 
 app.listen(PORT);

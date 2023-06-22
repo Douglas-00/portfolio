@@ -87,6 +87,7 @@ router.patch('/:slug',async(req,res)=>{
 })
 
 //Delete
+//Portfolio
 
 router.delete('/:slug', async(req,res)=>{
     try {
@@ -96,7 +97,7 @@ router.delete('/:slug', async(req,res)=>{
 
         res.json({
             success:true,
-            message:"Portfolio deletado com Sucesso!"
+            message:"Portfolio deletado com Sucesso !"
         })
     } catch (error) {
         res.json({

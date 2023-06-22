@@ -24,13 +24,13 @@ router.get('/:slug', async(req,res) => {
     try {
         const portfolioid = await Portfolio.findOne({
            slug:req.params.slug
-        })
+        });
         
 
         res.json({
             sucess:true,
             data:portfolioid
-        })
+        });
 
     } catch (error) {
         res.json({
@@ -51,7 +51,7 @@ router.post('/', async (req, res) => {
         res.json({
             sucess: true,
             data: savedPortfolio
-        })
+        });
     } catch (error) {
         res.json({
             success: false,
@@ -71,13 +71,33 @@ router.patch('/:slug',async(req,res)=>{
         {
             title:req.body.title,
             description:req.body.description
-        })
+        });
 
         res.json({
             success:true,
             message:"Portfolio alterado com Sucesso!"
-        })
+        });
 
+    } catch (error) {
+        res.json({
+            success: false,
+            message: error
+        }); 
+    }
+})
+
+//Delete
+
+router.delete('/:slug', async(req,res)=>{
+    try {
+        const deletedPortfolio = await Portfolio.deleteOne({
+            slug:req.params.slug
+        });
+
+        res.json({
+            success:true,
+            message:"Portfolio deletado com Sucesso!"
+        })
     } catch (error) {
         res.json({
             success: false,
